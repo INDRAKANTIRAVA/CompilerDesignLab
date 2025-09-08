@@ -19,7 +19,9 @@ int C(){return match('c');}
 
 int S(){
     int b=pos;
-    if(C()&&A()&&match('d'))return 1;
+    if(C()&&A()&&match('d'))
+        if (match('#'))
+            return 1;
     pos=b;
     return 0;
 }
