@@ -1,51 +1,73 @@
 #include <stdio.h>
 #include <string.h>
+#include<stdlib.h>
+#include<string.h>
 
 char input[100];
 int i = 0;
 
+void error();
 int S();
 int L();
+int Lprime();
 
 int main() {
-    printf("Enter the input string:\n");
+    printf("Enter input string:\n");
     scanf("%s", input);
 
-    if (S() && input[i] == '\0') {
+    if (S() && input[i] == '\0')
         printf("Successfully parsed\n");
-    } else {
+    else
         printf("Invalid parse\n");
-    }
 
     return 0;
 }
 
-int S() {
-    if (input[i] == 'a') {   // S → a
+void match(char c) {
+    if (input[i] == c) {
         i++;
+    } else {
+        error();
+    }
+}
+
+void error() {
+    printf("Invalid parse\n");
+    exit(0);
+}
+
+int S() {
+    if (input[i] == '(') {
+        match('(');
+        L();
+        match(')');
         return 1;
     }
-    else if (input[i] == '(') {  // S → ( L )
-        i++;
-        if (L()) {
-            if (input[i] == ')') {
-                i++;
-                return 1;
-            }
-        }
+    else if (input[i] == 'a') {
+        match('a');
+        return 1;
+    }
+    else {
+        error();
     }
     return 0;
 }
 
 int L() {
-    if (S()) {  // L → S (, S)*
-        while (input[i] == ',') {
-            i++;
-            if (!S()) {
-                return 0;
-            }
-        }
+    S();        // L → S L'
+    Lprime();
+    return 1;
+}
+
+int Lprime() {
+    if (input[i] == ',') {
+        match(',');
+        S();
+        Lprime();   // recursive
+    }
+    else {
+        // epsilon production
         return 1;
     }
-    return 0;
+    return 1;
 }
