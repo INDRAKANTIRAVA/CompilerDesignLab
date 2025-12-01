@@ -352,8 +352,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 4
-#define YY_END_OF_BUFFER 5
+#define YY_NUM_RULES 5
+#define YY_END_OF_BUFFER 6
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -363,7 +363,7 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[10] =
     {   0,
-        0,    0,    5,    3,    2,    2,    1,    1,    0
+        0,    0,    6,    4,    2,    3,    1,    1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -439,11 +439,11 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "P1.l"
-#line 2 "P1.l"
- #include <stdio.h>
- #include <stdlib.h>
- #include "y.tab.h"
+#line 1 "D1.l"
+#line 3 "D1.l"
+#include "D1.tab.h"
+#include <ctype.h>
+#include <stdlib.h>
 #line 447 "lex.yy.c"
 #line 448 "lex.yy.c"
 
@@ -662,7 +662,7 @@ YY_DECL
 		}
 
 	{
-#line 7 "P1.l"
+#line 8 "D1.l"
 
 #line 667 "lex.yy.c"
 
@@ -723,26 +723,31 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 8 "P1.l"
-{ yylval.dval = atoi(yytext); return DIGIT; }
+#line 9 "D1.l"
+{ yylval = atoi(yytext); return DIGIT; }
 	YY_BREAK
 case 2:
-/* rule 2 can match eol */
 YY_RULE_SETUP
-#line 10 "P1.l"
-;      /* ignore whitespace */
+#line 10 "D1.l"
+;   // ignore spaces and tabs
 	YY_BREAK
 case 3:
+/* rule 3 can match eol */
 YY_RULE_SETUP
-#line 12 "P1.l"
-{ return yytext[0]; }
+#line 11 "D1.l"
+{ return '\n'; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 13 "P1.l"
+#line 12 "D1.l"
+{ return yytext[0]; }
+	YY_BREAK
+case 5:
+YY_RULE_SETUP
+#line 13 "D1.l"
 ECHO;
 	YY_BREAK
-#line 745 "lex.yy.c"
+#line 750 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1747,8 +1752,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 13 "P1.l"
+#line 13 "D1.l"
 
-
-int yywrap() { return 1; }
+int yywrap(void) { return 1; }
 
