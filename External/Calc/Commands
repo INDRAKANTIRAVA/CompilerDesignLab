@@ -1,0 +1,4 @@
+bison -dy Desc.y
+flex Desc.l
+cc lex.yy.c y.tab.c -ll -ly -o Desc
+./Desc
